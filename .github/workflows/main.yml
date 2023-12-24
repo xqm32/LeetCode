@@ -18,7 +18,6 @@ jobs:
           git config --global user.email "458173774@qq.com"
           git config --global user.name "Qiming Xu"
       - name: Commit blog
-        working-directory: ./blog
         run: |
           echo y | python lcmd.py leetcode.json
       - name: Commit leetcode
