@@ -26,12 +26,12 @@ class LeetCode:
             stdout = textwrap.indent(stdout, "lcmd[INFO]:     ", lambda _: True)
             print(stdout, end="")
 
-    def __init__(self: Self, config_path: str = "config.json") -> None:
-        self.config_path: str = config_path
-        if not os.path.isfile(config_path):
-            print(f"lcmd[ERRO]: config file `{config_path}` not found")
+    def __init__(self: Self, config_path: str | None = None) -> None:
+        self.config_path: str = config_path or "config.json"
+        if not os.path.isfile(self.config_path):
+            print(f"lcmd[ERRO]: config file `{self.config_path}` not found")
             sys.exit(os.EX_CONFIG)
-        with open(config_path, "r") as f:
+        with open(self.config_path, "r") as f:
             self.config: dict[str, str] = json.load(f)
 
         if (today := self.config.get("today")) is not None:
