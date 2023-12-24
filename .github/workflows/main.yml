@@ -17,6 +17,10 @@ jobs:
         run: |
           git config --global user.email "458173774@qq.com"
           git config --global user.name "Qiming Xu"
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
       - name: Commit blog
         run: |
           echo y | python lcmd.py leetcode.json
