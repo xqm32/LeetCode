@@ -110,7 +110,7 @@ class LeetCode:
         choice: str = input("lcmd[INFO]: commit? [y/c/N] ")
         match choice:
             case "y" | "Y":
-                self._exec(["git", "add", month_path])
+                self._exec(["git", "add", "."])
                 self._exec(
                     ["git", "commit", "-m", f"leetcode: finished #{leetcode_id}"]
                 )
@@ -118,7 +118,7 @@ class LeetCode:
                 os.chdir(cwd)
                 self._exec(["mv", f"{self.today}.py", f"leetcode/{self.today}.py"])
             case "c" | "C":
-                self._exec(["git", "checkout", month_path])
+                self._exec(["git", "checkout", "."])
                 print("lcmd[INFO]: commit canceled and checkout")
             case _:
                 print("lcmd[INFO]: commit canceled")
