@@ -1,0 +1,17 @@
+#
+# @lc app=leetcode.cn id=537 lang=python3
+#
+# [537] 复数乘法
+#
+
+
+# @lc code=start
+class Solution:
+    def complexNumberMultiply(self, num1: str, num2: str) -> str:
+        a, b = num1.split("+")
+        c, d = num2.split("+")
+        a, b, c, d = int(a), int(b[:-1]), int(c), int(d[:-1])
+        return f"{a*c-b*d}+{a*d+b*c}i"
+
+
+# @lc code=end
