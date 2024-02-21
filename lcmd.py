@@ -54,14 +54,25 @@ class LeetCode:
             print(f"lcmd[ERRO]: please set `leetcode` in `{self.config_path}`")
             sys.exit(os.EX_CONFIG)
 
-        if not os.path.isfile(f"{self.today}.py"):
-            print(f"lcmd[ERRO]: file `{self.today}.py` not found")
+        extensions = {
+            "py": "python",
+            "ts": "typescript",
+        }
+        for ext in extensions:
+            if os.path.isfile(f"{self.today}.{ext}"):
+                break
+        else:
+            print(
+                f"lcmd[ERRO]: file matches {self.today} with extensions {extensions} not found"
+            )
             sys.exit(os.EX_NOINPUT)
-        with open(f"{self.today}.py", "r") as f:
+        problem_file: str = f"{self.today}.{ext}"
+
+        with open(f"{problem_file}", "r") as f:
             py_content = f.read().strip("\n")
-        leetcode_id = re.findall(r"^#.*id=(\d+).*$", py_content, re.MULTILINE)
+        leetcode_id = re.findall(r"@lc app=.*id=(\d+).*$", py_content, re.MULTILINE)
         if len(leetcode_id) == 0:
-            print(f"lcmd: leetcode id not found in `{self.today}.py`")
+            print(f"lcmd: leetcode id not found in `{problem_file}`")
             sys.exit(os.EX_DATAERR)
         leetcode_id = leetcode_id[0]
 
@@ -97,7 +108,7 @@ class LeetCode:
             "\n",
             f"# {self.today}\n",
             "\n",
-            "```python\n",
+            f"```{extensions[ext]}\n",
             f"{py_content}\n",
             "```\n",
         ]
@@ -116,7 +127,7 @@ class LeetCode:
                 )
                 self._exec(["git", "push"])
                 os.chdir(cwd)
-                self._exec(["mv", f"{self.today}.py", f"leetcode/{self.today}.py"])
+                self._exec(["mv", f"{problem_file}", f"leetcode/{problem_file}"])
             case "c" | "C":
                 self._exec(["git", "checkout", "."])
                 print("lcmd[INFO]: commit canceled and checkout")
