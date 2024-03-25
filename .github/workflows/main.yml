@@ -13,7 +13,7 @@ jobs:
           path: blog
       - name: Setup Git
         run: |
-          git config --global user.email "458173774@qq.com"
+          git config --global user.email "33349132+xqm32@users.noreply.github.com"
           git config --global user.name "Qiming Xu"
       - name: Setup Python
         uses: actions/setup-python@v5
