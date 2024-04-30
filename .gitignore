@@ -161,10 +161,3 @@ cython_debug/
 
 # macOS
 .DS_Store
-
-# Local files
-/config.json
-/LeetCode.code-workspace
-
-# Blog
-/blog
