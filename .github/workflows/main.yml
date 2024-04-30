@@ -6,24 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: xqm32/xqm32.github.io
-          token: ${{ secrets.LEETCODE }}
-          path: blog
-      - name: Setup Git
-        run: |
-          git config --global user.email "33349132+xqm32@users.noreply.github.com"
-          git config --global user.name "Qiming Xu"
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-      - name: Commit blog
-        run: |
-          echo y | python lcmd.py leetcode.json
       - name: Commit leetcode
         run: |
+          mv $(date +%Y.%-m.%d).* leetcode
           git add .
           git commit -m "leetcode: $(date -I)"
           git push
