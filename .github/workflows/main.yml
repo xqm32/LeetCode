@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Commit leetcode
         run: |
-          mv $(date +%Y.%-m.%d).* leetcode
+          mv $(date +%Y.%-m.%-d).* leetcode
           git add .
           git commit -m "leetcode: $(date -I)"
           git push
